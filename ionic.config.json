@@ -1,0 +1,7 @@
+{
+  "name": "PDF-IONIC",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
