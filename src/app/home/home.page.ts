@@ -175,83 +175,7 @@ export class HomePage {
             body: this.prepareRowData()
           },
           layout: { hLineColor: 'black', vLineColor: 'black' }
-        },
-        // View For Total Amount Due Begin
-        // {
-          // absolutePosition: { x: 0, y: this.height },
-          // canvas: [
-          //   {
-          //     type: 'rect',
-          //     x: 350,
-          //     y: this.height - 165,
-          //     w: 180,
-          //     h: 65,
-          //     r: 4,
-          //     lineColor: '#D3D3D3',
-          //     color: '#D3D3D3'
-          //   },
-          //   {
-          //     type: 'rect',
-          //     x: 350,
-          //     y: this.height - 165,
-          //     w: 177,
-          //     h: 62,
-          //     r: 4,
-          //     lineColor: '#D3D3D3',
-          //     color: 'white'
-          //   },
-          // ],
-          // canvas: [
-          //   {
-          //     type: 'rect',
-          //     x: 350,
-          //     y: -totalCard,
-          //     w: 180,
-          //     h: 65,
-          //     r: 4,
-          //     lineColor: '#D3D3D3',
-          //     color: '#D3D3D3',
-          //   },
-          //   {
-          //     type: 'rect',
-          //     x: 350,
-          //     y: -totalCard,
-          //     w: 177,
-          //     h: 62,
-          //     r: 4,
-          //     lineColor: '#D3D3D3',
-          //     color: 'white',
-          //   },
-          // ]
-        // },
-        // {
-        //   text: 'TOTAL AMOUNT DUE',
-        //   relativePosition: { x: 0, y: 0 },
-        //   fontSize: 11,
-        //   bold: true,
-        //   color: textColorPrimary,
-        //   alignment: 'right'
-        // },
-        // {
-        //   text: `1000 DR`,
-        //   absolutePosition: { x: 0, y: totalCard + 30 },
-        //   fontSize: 10,
-        //   color: 'blue',
-        //   alignment: 'right'
-        // },
-        // View For Total Amount Due End
-        // {
-        //   canvas: [
-        //       {
-        //           type: 'line',
-        //           x1: 10,
-        //           y1: this.height - 360,
-        //           x2: 515,
-        //           y2: this.height - 360,
-        //           lineWidth: 2
-        //       }
-        //   ]
-        // }
+        }
       ],
       pageBreakBefore: function (currentNode, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage) {
         // console.log('1', currentNode);
@@ -283,8 +207,8 @@ export class HomePage {
 
   async onDownload() {
     this.pdfObj.getBuffer(buffer => {
-      var utf8 = new Uint8Array(buffer); // Convert to UTF-8...
-      let binaryArray = utf8.buffer; //
+      const utf8 = new Uint8Array(buffer); // Convert to UTF-8...
+      const binaryArray = utf8.buffer; //
       this.file.resolveDirectoryUrl(this.file.externalRootDirectory)
         .then(dirEntry => {
           console.log('PATH---', dirEntry);
@@ -293,7 +217,6 @@ export class HomePage {
               console.log('PATHHHHHH---', dirEntry);
               fileEntry.createWriter(writer => {
                 writer.onwrite = async () => {
-                  // this.fileOpener.open(fileEntry.toURL(), 'application/pdf')
                   this.loading.dismiss();
                   const alert = await this.alertController.create({
                     header: 'Confirm!',
@@ -337,9 +260,9 @@ export class HomePage {
   }
 
   prepareRowData() {
-    let headingColor = '#8f1515';
-    let textColorSecondary = '#202020';
-    const body = []
+    const headingColor = '#8f1515';
+    const textColorSecondary = '#202020';
+    const body = [];
     body.push(
       [
         { text: 'DATE', color: headingColor, fontSize: 10 },
@@ -350,89 +273,8 @@ export class HomePage {
         { text: 'BALANCE', color: headingColor, fontSize: 10, alignment: 'right' }
       ]
     );
-    // tslint:disable-next-line: max-line-length
-    // body.push([ '', '', 
-    //   { 
-    //     text: 'Brought Forward', 
-    //     color: 'blue', 
-    //     bold: true, 
-    //     fontSize: 9,
-    //     margin: [0, 6, 0, 6] 
-    //   }, '', '', 
-    //   { 
-    //     text: '24,023.75 DR', 
-    //     color: 'blue', 
-    //     bold: true, 
-    //     fontSize: 8,
-    //     margin: [0, 6, 0, 6], 
-    //     alignment: 'right' 
-    //   }
-    // ]);
 
     this.height += 50;
-
-    // Remove the temp iterate forEachloop after testing after testing
-    // this.tempIterate.forEach(element => {
-    //   console.log('+-+-+-+');
-
-    //     //Main code Begin
-    //     this.statements.forEach(statement => {
-    //       this.height += 26;
-    //       const row = [
-    //         {
-    //         text: new DatePipe('en_ZM').transform(statement.date, 'dd/mm/yy'),
-    //         color: textColorSecondary,
-    //         fontSize: 8,
-    //         margin: [0, 6, 0, 6],
-    //         lineHeight: 1
-    //       },
-    //       {
-    //         text: statement.ref,
-    //         color: textColorSecondary,
-    //         fontSize: 8,
-    //         margin: [0, 6, 0, 6],
-    //         lineHeight: 1
-    //       },
-    //       {
-    //         text: statement.desc,
-    //         color: textColorSecondary,
-    //         fontSize: 8,
-    //         margin: [0, 6, 0, 6],
-    //         lineHeight: 1
-    //       },
-    //       {
-    //         text: statement.debit ? Number(statement.debit).toFixed(2): '',
-    //         color: textColorSecondary,
-    //         fontSize: 8,
-    //         margin: [0, 6, 0, 6],
-    //         lineHeight: 1,
-    //         alignment: 'right'
-    //       },
-    //       {
-    //         text: statement.credit ? Number(statement.credit).toFixed(2): '',
-    //         color: textColorSecondary,
-    //         fontSize: 8,
-    //         margin: [0, 6, 0, 6],
-    //         lineHeight: 1,
-    //         alignment: 'right'
-    //       },
-    //       {
-    //         text: Number(statement.balance).toFixed(2) + '  DR',
-    //         color: textColorSecondary,
-    //         fontSize: 8,
-    //         margin: [0, 6, 0, 6],
-    //         lineHeight: 1,
-    //         alignment: 'right'
-    //       }
-    //     ]
-    //     body.push(row);
-
-    //   }
-
-    //   )
-    //   //Main code End
-
-    // });
 
     for (let i = 0; i <= 40; i++) {
       this.height += 26;
